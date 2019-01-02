@@ -17,13 +17,13 @@ export const DiscussionCard = ({ discussion }) =>
         <StatsContainer>
             <CommentsCount>
                 <BadgeNumber 
-                    number={2} 
+                    number={discussion.commentsCount} 
                     background="rgb(220, 234, 239)" 
                     foreground="rgb(109, 128, 136)" 
                 /> &nbsp;comments
             </CommentsCount>                 
             <TokenStaked>
-                <strong>34</strong> token staked
+                <strong>{discussion.stakedTokens}</strong> token staked
             </TokenStaked>            
 
         </StatsContainer>
