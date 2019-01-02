@@ -8,7 +8,8 @@ import {
   Card
 
 } from '@aragon/ui'
-import './App.css'
+
+import { MainStore } from './stores/main-store'
 
 class App extends Component {
   render() {
