@@ -4,10 +4,28 @@ import { Card, Text, Button, BadgeNumber } from '@aragon/ui'
 
 export const DiscussionCard = ({ discussion }) => 
     <Main>
-        <DateContainer>{printDate(discussion.date)}</DateContainer>
+        <TopBar>
+
+            <DateContainer>{printDate(discussion.date)}</DateContainer>
+
+            <ClosingInfo>
+                Closing in <strong>3</strong> days
+            </ClosingInfo>                   
+        </TopBar>
+        
         <Title>{discussion.title}</Title>
         <StatsContainer>
-            <BadgeNumber number={2} background="rgb(220, 234, 239)" foreground="rgb(109, 128, 136)" /> comments
+            <CommentsCount>
+                <BadgeNumber 
+                    number={2} 
+                    background="rgb(220, 234, 239)" 
+                    foreground="rgb(109, 128, 136)" 
+                /> &nbsp;comments
+            </CommentsCount>                 
+            <TokenStaked>
+                <strong>34</strong> token staked
+            </TokenStaked>            
+
         </StatsContainer>
         <Description>{discussion.description}</Description>
 
@@ -24,7 +42,7 @@ function printDate(date) {
 }
 
 const Main = styled(Card)`
-    padding: 6px 16px 16px 16px;
+    padding: 6px 12px 16px 12px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -34,12 +52,8 @@ const Main = styled(Card)`
 
 const Title = styled(Text)
     .attrs({ size: 'xlarge' })`
-    margin-top: 10px;
+    margin-top: 16px;
 
-`
-
-const StatsContainer = styled.div`
-    display: flex;
 `
 
 const Description = styled(Text)`
@@ -51,10 +65,42 @@ const BottomBar = styled.div`
     margin-top: auto;
 
 `
+const TopBar = styled.div`
+    display: flex;
+    color: #666;
+    font-size: 12px;    
+    justify-content: end;
+    width: 100%;
+`
+
+const CommentsCount = styled.div`
+    display: flex;
+    font-size: 12px;
+    color: #666;    
+`
 
 const DateContainer = styled.div`
-    text-align: right;
+    text-align: left;
     font-size: 12px;
     color: #666;
     width: 100%;
+`
+
+
+const StatsContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+`
+
+const TokenStaked = styled.div`
+    font-size: 12px;
+    color: #666;
+`
+
+const ClosingInfo = styled.div`
+    width: 140px;
+    font-size: 12px;
+    color: #666;
+    display: none;
 `
