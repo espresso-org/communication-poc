@@ -10,7 +10,7 @@ import {
 
 } from '@aragon/ui'
 import { DiscussionListScreen } from './components/discussion-list-screen'
-import { DiscussionCard } from './components/discussion-card'
+import { DiscussionScreen } from './components/discussion-screen'
 import { Screen } from './components/screen'
 
 import { MainStore, ScreenType } from './stores/main-store'
@@ -29,29 +29,13 @@ class App extends Component {
           mainStore={mainStore} 
         />     
 
-        <Screen position={1} animate>
-          {mainStore.currentScreen === ScreenType.Discussion && (
-              <span>
-          <AppBar
-            title="Discussion"
-            endContent={
-              <div>
-                <Button mode="strong">fawefewf</Button>
-              </div>
-            }
-          />      
-          <AppLayout.ScrollWrapper>
-            <AppLayout.Content>           
-              <Text size="xlarge">Discussions</Text>
-
-            </AppLayout.Content>
-          </AppLayout.ScrollWrapper>
-          </span>
-          )}
-        </Screen>                 
+        <DiscussionScreen 
+          isVisible={mainStore.currentScreen === ScreenType.Discussion} 
+          mainStore={mainStore} 
+        />                 
       </AragonApp>
-    );
+    )
   }
 }
 
-export default App;
+export default App
