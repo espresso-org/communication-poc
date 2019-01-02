@@ -1,31 +1,38 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react'
+import { AppLayout } from './components/app-layout'
 import {
   AragonApp,
-  Button
+  AppBar,
+  Button,
+  Text,
+  Card
+
 } from '@aragon/ui'
 import './App.css'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <Button>Test!!!</Button>
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save111 to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <AragonApp publicUrl="./aragon-ui/">
+          <AppBar
+            title="Discussions"
+            endContent={
+              <div>
+                <Button mode="strong">New Discussion</Button>
+              </div>
+            }
+          />      
+          <AppLayout.ScrollWrapper>
+            <AppLayout.Content>
+              <Text size="xlarge">Open Discussions</Text>
+              <br />
+              <Card>
+                allo
+              </Card>
+              test
+            </AppLayout.Content>
+          </AppLayout.ScrollWrapper>
+      </AragonApp>
     );
   }
 }
