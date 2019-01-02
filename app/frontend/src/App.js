@@ -8,8 +8,11 @@ import {
   Card
 
 } from '@aragon/ui'
+import { DiscussionCard } from './components/discussion-card'
 
 import { MainStore } from './stores/main-store'
+
+const mainStore = new MainStore()
 
 class App extends Component {
   render() {
@@ -27,6 +30,9 @@ class App extends Component {
             <AppLayout.Content>
               <Text size="xlarge">Open Discussions</Text>
               <br />
+              {mainStore.discussions.map(discussion => 
+                <DiscussionCard discussion={discussion} />
+              )}
               <Card>
                 allo
               </Card>
