@@ -33,10 +33,6 @@ class App extends Component {
               {mainStore.discussions.map(discussion => 
                 <DiscussionCard discussion={discussion} />
               )}
-              <Card>
-                allo
-              </Card>
-              test
             </AppLayout.Content>
           </AppLayout.ScrollWrapper>
       </AragonApp>
