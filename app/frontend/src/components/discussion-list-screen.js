@@ -29,7 +29,10 @@ export const DiscussionListScreen = ({ isVisible, mainStore }) =>
                         <Text size="xlarge">Open Discussions</Text>
                         <br />
                         {mainStore.discussions.map(discussion => 
-                        <DiscussionCard discussion={discussion} />
+                            <DiscussionCard 
+                                discussion={discussion} 
+                                onOpenClick={() => mainStore.openDiscussion(discussion.id)}
+                            />
                         )}
                     </AppLayout.Content>
                 </AppLayout.ScrollWrapper>

@@ -1,4 +1,4 @@
-import { observable } from 'mobx'
+import { observable, action } from 'mobx'
 
 export const ScreenType = {
     DiscussionList: 'DiscussionList',
@@ -16,4 +16,9 @@ export class MainStore {
         stakedTokens: 34,
         date: new Date('2018-12-31')
     }]
+
+
+    @action openDiscussion(discussionId) {
+        this.currentScreen = ScreenType.Discussion
+    }
 }

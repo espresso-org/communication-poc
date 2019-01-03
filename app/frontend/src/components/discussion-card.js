@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Card, Text, Button, BadgeNumber } from '@aragon/ui'
 
-export const DiscussionCard = ({ discussion }) => 
+export const DiscussionCard = ({ discussion, onOpenClick }) => 
     <Main>
         <TopBar>
 
@@ -30,7 +30,7 @@ export const DiscussionCard = ({ discussion }) =>
         <Description>{discussion.description}</Description>
 
         <BottomBar>
-            <Button mode="strong">See Discussion</Button>
+            <Button onClick={onOpenClick} mode="strong">See Discussion</Button>
         </BottomBar>
     </Main>
 

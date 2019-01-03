@@ -13,7 +13,7 @@ import {
 
 
 export const DiscussionScreen = ({ isVisible, mainStore }) => 
-    <Screen position={2} animate>
+    <Screen position={0} animate>
         {isVisible && (
             <span>
                 <AppBar> 
