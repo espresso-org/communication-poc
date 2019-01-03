@@ -18,7 +18,7 @@ export const DiscussionScreen = ({ isVisible, mainStore }) =>
             <span>
                 <AppBar> 
                    <BackButton />
-                   <Text size="xxlarge">faewfea</Text>
+                   <Text size="xxlarge">Discussion Details</Text>
                 </AppBar>
                 <AppLayout.ScrollWrapper>
                     <AppLayout.Content>           

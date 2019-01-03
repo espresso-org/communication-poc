@@ -1,4 +1,5 @@
 import { observable, action } from 'mobx'
+import { fromPromise } from 'mobx-utils'
 
 export const ScreenType = {
     DiscussionList: 'DiscussionList',
@@ -16,6 +17,13 @@ export class MainStore {
         stakedTokens: 34,
         date: new Date('2018-12-31')
     }]
+
+    
+    @observable currentDiscussionId
+
+    @computed get currentDiscussion() {
+        return fromPromise(new Promise(res => res(this.discussions[this.currentDiscussionId])))
+    }
 
 
     @action openDiscussion(discussionId) {
