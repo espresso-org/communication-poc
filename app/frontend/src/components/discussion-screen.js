@@ -9,22 +9,20 @@ import {
     Card
   
   } from '@aragon/ui'
+  import { BackButton } from './back-button'
 
 
 export const DiscussionScreen = ({ isVisible, mainStore }) => 
-    <Screen position={1} animate>
+    <Screen position={2} animate>
         {isVisible && (
             <span>
-                <AppBar
-                title="Discussion"
-                endContent={
-                    <div>
-                    </div>
-                }
-                />      
+                <AppBar> 
+                   <BackButton />
+                   <Text size="xxlarge">faewfea</Text>
+                </AppBar>
                 <AppLayout.ScrollWrapper>
                     <AppLayout.Content>           
-
+                            faefaewf
                     </AppLayout.Content>
                 </AppLayout.ScrollWrapper>
             </span>
