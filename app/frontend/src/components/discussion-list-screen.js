@@ -12,8 +12,8 @@ import {
   } from '@aragon/ui'
 
 
-export const DiscussionListScreen = ({ isVisible, mainStore }) => 
-    <Screen position={1} animate>
+export const DiscussionListScreen = ({ position, isVisible, mainStore }) => 
+    <Screen position={position} animate>
         {isVisible && (
             <span>
                 <AppBar

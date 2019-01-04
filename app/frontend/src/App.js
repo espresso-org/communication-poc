@@ -11,7 +11,7 @@ import {
 } from '@aragon/ui'
 import { DiscussionListScreen } from './components/discussion-list-screen'
 import { DiscussionScreen } from './components/discussion-screen'
-import { Screen } from './components/screen'
+
 
 
 import { MainStore, ScreenType } from './stores/main-store'
@@ -26,11 +26,13 @@ class App extends Component {
     return (
       <AragonApp publicUrl="./aragon-ui/">
         <DiscussionListScreen 
+          position={0}
           isVisible={mainStore.currentScreen === ScreenType.DiscussionList} 
           mainStore={mainStore} 
         />     
 
         <DiscussionScreen 
+          position={1}
           isVisible={mainStore.currentScreen === ScreenType.Discussion} 
           mainStore={mainStore} 
         />                 

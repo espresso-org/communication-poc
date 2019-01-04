@@ -1,6 +1,7 @@
 import React from 'react'
 import { Screen } from './screen'
 import { AppLayout } from './app-layout'
+import { ScreenType } from '../stores/main-store'
 import {
     AragonApp,
     AppBar,
@@ -12,12 +13,14 @@ import {
   import { BackButton } from './back-button'
 
 
-export const DiscussionScreen = ({ isVisible, mainStore }) => 
-    <Screen position={0} animate>
+export const DiscussionScreen = ({ position, isVisible, mainStore }) => 
+    <Screen position={position} animate>
         {isVisible && (
             <span>
                 <AppBar> 
-                   <BackButton />
+                   <BackButton 
+                     onClick={() => mainStore.setCurrentScreen(ScreenType.DiscussionList)} 
+                   />
                    <Text size="xxlarge">Discussion Details</Text>
                 </AppBar>
                 <AppLayout.ScrollWrapper>

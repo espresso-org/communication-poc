@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx'
+import { observable, action, computed } from 'mobx'
 import { fromPromise } from 'mobx-utils'
 
 export const ScreenType = {
@@ -25,6 +25,9 @@ export class MainStore {
         return fromPromise(new Promise(res => res(this.discussions[this.currentDiscussionId])))
     }
 
+    @action setCurrentScreen(screenType) {
+        this.currentScreen = screenType
+    }
 
     @action openDiscussion(discussionId) {
         this.currentScreen = ScreenType.Discussion
