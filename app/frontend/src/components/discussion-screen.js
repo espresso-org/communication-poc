@@ -10,10 +10,11 @@ import {
     Card
   
   } from '@aragon/ui'
-  import { BackButton } from './back-button'
+import { BackButton } from './back-button'
+import { observer } from 'mobx-react'
 
 
-export const DiscussionScreen = ({ position, isVisible, mainStore }) => 
+export const DiscussionScreen = observer(({ position, isVisible, currentDiscussion, mainStore }) => 
     <Screen position={position} animate>
         {isVisible && (
             <span>
@@ -24,10 +25,18 @@ export const DiscussionScreen = ({ position, isVisible, mainStore }) =>
                    <Text size="xxlarge">Discussion Details</Text>
                 </AppBar>
                 <AppLayout.ScrollWrapper>
-                    <AppLayout.Content>           
-                            faefaewf
-                    </AppLayout.Content>
+                    {currentDiscussion.state === 'pending' &&
+                        <AppLayout.Content>           
+                        Loading...   
+                        </AppLayout.Content>
+                    }                        
+                    { currentDiscussion.value && 
+                        <AppLayout.Content>           
+                        {currentDiscussion.value.title}       
+                        </AppLayout.Content>
+                    }
                 </AppLayout.ScrollWrapper>
             </span>
         )}
-    </Screen>     
+    </Screen>  
+)   

@@ -11,6 +11,7 @@ export class MainStore {
     @observable currentScreen = ScreenType.DiscussionList
 
     @observable discussions = [{
+        id: 0,
         title: 'Test title',
         description: 'Should we upgrade the voting app to v2?',
         commentsCount: 2,
@@ -22,7 +23,7 @@ export class MainStore {
     @observable currentDiscussionId
 
     @computed get currentDiscussion() {
-        return fromPromise(new Promise(res => res(this.discussions[this.currentDiscussionId])))
+        return fromPromise(new Promise(res => res(this.discussions[this.currentDiscussionId] || 'fawe')))
     }
 
     @action setCurrentScreen(screenType) {
@@ -30,6 +31,7 @@ export class MainStore {
     }
 
     @action openDiscussion(discussionId) {
+        this.currentDiscussionId = discussionId
         this.currentScreen = ScreenType.Discussion
     }
 }

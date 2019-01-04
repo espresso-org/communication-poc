@@ -34,6 +34,7 @@ class App extends Component {
         <DiscussionScreen 
           position={1}
           isVisible={mainStore.currentScreen === ScreenType.Discussion} 
+          currentDiscussion={mainStore.currentDiscussion}
           mainStore={mainStore} 
         />                 
       </AragonApp>
