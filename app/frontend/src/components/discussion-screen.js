@@ -15,6 +15,7 @@ import {
 import { BackButton } from './back-button'
 import { observer } from 'mobx-react'
 import { SideBar } from './side-bar'
+import { Message } from './message'
 
 
 export const DiscussionScreen = observer(({ position, isVisible, currentDiscussion, mainStore }) => 
@@ -44,7 +45,7 @@ export const DiscussionScreen = observer(({ position, isVisible, currentDiscussi
                                         }
                                         {mainStore.currentDiscussionMessages.value &&
                                             mainStore.currentDiscussionMessages.value.map(message =>
-                                                <Message>{message.content}</Message>
+                                                <Message message={message} />
                                             )
                                         }                                        
                                     </Discussions>
@@ -93,12 +94,7 @@ const Title = styled(Text).attrs({ size: 'xlarge' })`
     margin-bottom: 20px;
 `
 
-const Message =styled(Card)`
-    width: 100%;
-    padding: 16px;
-    min-height: 100px;
-    height: auto;    
-`
+
 
 const Discussions = styled.div`
 `
