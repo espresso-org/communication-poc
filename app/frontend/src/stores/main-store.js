@@ -18,6 +18,7 @@ const discussions = [{
 // Messages for every Disussions
 const messages = {
     0: [{
+        author: '0xb4124cEB3451635DAcedd11767f004d8a28c6eE7',
         content: 'This is my first message',
         date: new Date('2019-01-02')
     }
