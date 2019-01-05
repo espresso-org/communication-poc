@@ -6,29 +6,67 @@ import Blockies from 'react-blockies'
 
 export const Message = ({ message }) => 
     <Main>
-        <Author title={message.author} size={46}>
-            <Blockies
-                seed={message.author}
-                size={26}
-                scale={4}
-                color='#dfe'
-                bgColor='#ffe'
-                spotColor='#abc'
-            />
-        </Author>        
-        {message.content}
+        <TopContent>
+            <AuthorIcon title={message.author} size={46}>
+                <Blockies
+                    seed={message.author}
+                    size={26}
+                    scale={4}
+                    color='#dfe'
+                    bgColor='#ffe'
+                    spotColor='#abc'
+                />
+            </AuthorIcon>  
+            <div>
+                <MessageInfo>
+                    <Author>{message.author}</Author>
+                    <MessageDate>5:32pm</MessageDate>
+                </MessageInfo>
+                <MessageContent>{message.content}</MessageContent>
+            </div>      
+        </TopContent>
+        <BottomBar></BottomBar>
     </Main>
 
 
 
 const Main =styled(Card)`
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    padding: 16px;
-    min-height: 100px;
     height: auto;    
 `
 
-const Author = styled.div(({ size=32 }) => `
+const TopContent = styled.div`
+    display: flex;
+    flex-direction: row;
+    min-height: 90px;
+    padding: 16px;
+`
+
+const BottomBar = styled.div`
+    height: 34px;
+    padding: 0 16px;
+    /*border-top: 1px solid #E6E6E6;*/
+`
+
+const MessageInfo = styled.div`
+    display: flex;
+`
+
+const MessageDate = styled.div`
+    color: #E6E6E6;
+`
+
+const Author = styled.div`
+    font-weight: 600;
+`
+
+const MessageContent = styled.div`
+
+`
+
+const AuthorIcon = styled.div(({ size=32 }) => `
     display: inline-block;
     width: ${size}px;
     min-width: ${size}px;
@@ -37,5 +75,5 @@ const Author = styled.div(({ size=32 }) => `
     border-radius: 50%;
     overflow: hidden;
     background: white;    
-    margin-right: 6px;
+    margin-right: 16px;
 `)
