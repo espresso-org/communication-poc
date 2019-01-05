@@ -7,6 +7,7 @@ import {
     AragonApp,
     AppBar,
     Button,
+    Card,
     Text,
     TextInput
   
@@ -36,8 +37,22 @@ export const DiscussionScreen = observer(({ position, isVisible, currentDiscussi
                         <Content> 
                             <TwoPanels>
                                 <MainContent>
-                                    <Text size="xlarge">{currentDiscussion.value.title}</Text>
-                                    <MainTextInput />
+                                    <Title size="xlarge">{currentDiscussion.value.title}</Title>
+                                    <Discussions>
+                                        {mainStore.currentDiscussionMessages.state === 'pending' &&
+                                            <div>Loading...</div>
+                                        }
+                                        {mainStore.currentDiscussionMessages.value &&
+                                            mainStore.currentDiscussionMessages.value.map(message =>
+                                                <Message>{message.content}</Message>
+                                            )
+                                        }                                        
+                                    </Discussions>
+                                    <MainTextInput 
+                                        placeholder="Enter your message..."
+                                        value={mainStore.currentMessageText} 
+                                        onChange={e => mainStore.currentMessageText = e.currentTarget.value} 
+                                    />
                                 </MainContent>
                                 <SideBar />
                             </TwoPanels>          
@@ -72,6 +87,20 @@ const MainContent = styled.aside`
     
     width: 100%;
 
+`
+
+const Title = styled(Text).attrs({ size: 'xlarge' })`
+    margin-bottom: 20px;
+`
+
+const Message =styled(Card)`
+    width: 100%;
+    padding: 16px;
+    min-height: 100px;
+    height: auto;    
+`
+
+const Discussions = styled.div`
 `
 
 const Content = styled(AppLayout.Content)`

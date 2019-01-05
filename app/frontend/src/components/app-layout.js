@@ -17,7 +17,6 @@ AppLayout.ScrollWrapper = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   flex-grow: 1;
-  height: 100%;
 `
 AppLayout.Content = styled.div`
   display: flex;
