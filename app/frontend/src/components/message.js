@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Card } from '@aragon/ui'
 import Blockies from 'react-blockies'
+import { EthAddress } from './eth-address'
 
 
 export const Message = ({ message }) => 
@@ -19,7 +20,7 @@ export const Message = ({ message }) =>
             </AuthorIcon>  
             <div>
                 <MessageInfo>
-                    <Author>{message.author}</Author>
+                    <Author><EthAddress ethAddress={message.author} /></Author>
                     <MessageDate>5:32pm</MessageDate>
                 </MessageInfo>
                 <MessageContent>{message.content}</MessageContent>
