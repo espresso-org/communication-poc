@@ -68,5 +68,7 @@ export class MainStore {
             content: message.content,
             date: new Date('2019-01-02')
         })
+
+        this.currentMessageText = ''
     }
 }
