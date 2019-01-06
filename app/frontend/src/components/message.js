@@ -53,10 +53,12 @@ const BottomBar = styled.div`
 
 const MessageInfo = styled.div`
     display: flex;
+    align-items: center;
 `
 
 const MessageDate = styled.div`
-    color: #E6E6E6;
+    margin-left: 8px;
+    color: #ccc;
 `
 
 const Author = styled.div`
@@ -64,7 +66,7 @@ const Author = styled.div`
 `
 
 const MessageContent = styled.div`
-
+    margin-top: 4px;
 `
 
 const AuthorIcon = styled.div(({ size=32 }) => `

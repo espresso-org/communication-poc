@@ -17,5 +17,5 @@ const Identifier = styled(Badge.App)`
   text-overflow: ellipsis;
   display: block;
   font-size: 15px;
-  margin-left: 0px;
+  margin-left: -2px;
 `
