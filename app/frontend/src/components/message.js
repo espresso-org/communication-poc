@@ -35,7 +35,11 @@ const Main =styled(Card)`
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: auto;    
+    height: auto;  
+    margin-top: 16px;
+    &:first-of-type {
+        margin-top: 0;
+    }
 `
 
 const TopContent = styled.div`

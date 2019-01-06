@@ -16,6 +16,7 @@ import { BackButton } from './back-button'
 import { observer } from 'mobx-react'
 import { SideBar } from './side-bar'
 import { Message } from './message'
+import main from 'react-blockies';
 
 
 export const DiscussionScreen = observer(({ position, isVisible, currentDiscussion, mainStore }) => 
@@ -53,6 +54,7 @@ export const DiscussionScreen = observer(({ position, isVisible, currentDiscussi
                                         placeholder="Enter your message..."
                                         value={mainStore.currentMessageText} 
                                         onChange={e => mainStore.currentMessageText = e.currentTarget.value} 
+                                        onKeyPress={onEnterKeyPress(() => mainStore.sendMessage({ content: mainStore.currentMessageText }, mainStore.currentDiscussionId ))}
                                     />
                                 </MainContent>
                                 <SideBar />
@@ -65,6 +67,10 @@ export const DiscussionScreen = observer(({ position, isVisible, currentDiscussi
         )}
     </Screen>  
 )   
+
+function onEnterKeyPress(cb) {
+    return e => e.key === 'Enter' && cb()
+}
 
 
 const Main = styled.div`

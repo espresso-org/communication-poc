@@ -31,6 +31,15 @@ export class MainStore {
 
     @observable discussions = discussions
 
+    @observable messages = {
+        0: [{
+            author: '0xb4124cEB3451635DAcedd11767f004d8a28c6eE7',
+            content: 'This is my first message',
+            date: new Date('2019-01-02')
+        }
+        ]
+    }
+
     @observable currentMessageText = ''
 
     
@@ -41,7 +50,7 @@ export class MainStore {
     }
 
     @computed get currentDiscussionMessages() {
-        return fromPromise(new Promise(res => res(messages[this.currentDiscussionId])))
+        return fromPromise(new Promise(res => res(this.messages[this.currentDiscussionId])))
     }
 
     @action setCurrentScreen(screenType) {
@@ -51,5 +60,13 @@ export class MainStore {
     @action openDiscussion(discussionId) {
         this.currentDiscussionId = discussionId
         this.currentScreen = ScreenType.Discussion
+    }
+
+    @action sendMessage(message, discussionId) {
+        this.messages[discussionId].push({
+            author: '0xb4124cEB3451635DAcedd11767f004d8a28c6eE7',
+            content: message.content,
+            date: new Date('2019-01-02')
+        })
     }
 }
