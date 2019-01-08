@@ -1,3 +1,5 @@
+//import Web3 from 'web3'
+
 const Web3 = window.Web3
 const TTL = 7 // TTL of messages in seconds
 

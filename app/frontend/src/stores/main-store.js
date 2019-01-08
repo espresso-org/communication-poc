@@ -2,6 +2,7 @@ import { observable, action, computed } from 'mobx'
 import { fromPromise } from 'mobx-utils'
 import config from '../config'
 import { WhisperProvider } from '../messaging-provider/whisper'
+import { EthDiscussions } from '../utils/eth-discussions'
 
 export const ScreenType = {
     DiscussionList: 'DiscussionList',
@@ -28,6 +29,8 @@ export class MainStore {
             privKey: config.whisperPrivateKey,
             pubKey: config.whisperPublicKey
         })
+
+        this._ethDiscussion = new EthDiscussions()
     }
 
     @observable currentScreen = ScreenType.DiscussionList
