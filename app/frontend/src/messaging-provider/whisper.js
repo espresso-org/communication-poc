@@ -1,5 +1,6 @@
 const Web3 = window.Web3
-const TTL = 60 * 60 * 24 // TTL of messages in seconds: 1 day 
+const TTL = 7 // TTL of messages in seconds
+
 
 export class WhisperProvider {
 
