@@ -1,7 +1,8 @@
 import DiscussionAppContract from "../contracts/DiscussionApp.json"
+import getWeb3 from './get-web3'
 
-const Web3 = window.Web3
-const web3 = window.web3
+//const Web3 = window.Web3
+//const web3 = window.web3
 
 export class EthDiscussions {
 
@@ -13,15 +14,15 @@ export class EthDiscussions {
     }
 
     async _initialize() {
-        this._web3 = new Web3(web3.currentProvider)
+        //this._web3 = new Web3(web3.currentProvider)
+        this._web3 = await getWeb3()
         
         const accounts = await this._web3.eth.getAccounts()
 
         // Get the contract instance.
-        //const networkId = await this._web3.eth.net.getId()
-        const networkId = await this._web3.version.getNetwork()
+        const networkId = await this._web3.eth.net.getId()
         const deployedNetwork = DiscussionAppContract.networks[networkId]
-        this._contract = new this._web3.eth.contract(
+        this._contract = new this._web3.eth.Contract(
             DiscussionAppContract.abi,
           deployedNetwork && deployedNetwork.address,
         )        
