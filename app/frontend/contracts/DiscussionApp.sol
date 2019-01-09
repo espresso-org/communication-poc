@@ -13,18 +13,18 @@ contract DiscussionApp /*is AragonApp*/ {
     uint64 startTime;
     string title;
 
-    //Message[] messages;
-
-    bool isClosed;
+    bool isOpened;
 
   }
 
   struct Message {
     address author;
+    uint64 timestamp;
   }
 
 
   Discussion[] private discussions;
+  mapping ( uint256 => Message[] ) messages; // discussionId => Message
 
 
   constructor() public {
@@ -39,22 +39,36 @@ contract DiscussionApp /*is AragonApp*/ {
       startTime: uint64(now),
       author: msg.sender,
       title: _title,
-      isClosed: false
+      isOpened: true
+    }));
+
+  }
+
+
+  function addMessage(uint256 _discussionId) 
+    public
+  {
+    require(discussions[_discussionId].isOpened);
+
+    messages[_discussionId].push(Message({
+      author: msg.sender,
+      timestamp: uint64(now)
     }));
   }
+
   
   function getDiscussionsCount() public view returns (uint256) {
     return discussions.length;
   }
 
 
-  function getDiscussion(uint256 index) public view returns (uint256 startTime, address author, string title, bool isClosed) {
+  function getDiscussion(uint256 index) public view returns (uint256 startTime, address author, string title, bool isOpened) {
     Discussion memory disc = discussions[index];
 
     startTime = disc.startTime;
     author = disc.author;
     title = disc.title;
-    isClosed = disc.isClosed;
+    isOpened = disc.isOpened;
 
   }
 
