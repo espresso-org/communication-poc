@@ -1,7 +1,9 @@
 //import Web3 from 'web3'
 
 const Web3 = window.Web3
-const TTL = 7 // TTL of messages in seconds
+const TTL = 60 * 60 // TTL of messages in seconds (1 hour)
+const POW_TARGET = 0.2
+const POW_TIME = 60
 
 
 export class WhisperProvider {
@@ -23,8 +25,8 @@ export class WhisperProvider {
             pubKey: this._opts.pubKey,
             ttl: TTL,
             topic,
-            powTarget: 2.01,
-            powTime: 2,
+            powTarget: POW_TARGET,
+            powTime: POW_TIME,
             payload: this._shhWeb3.fromUtf8(message)
         })  
     }
