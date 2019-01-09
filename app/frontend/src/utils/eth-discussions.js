@@ -28,14 +28,30 @@ export class EthDiscussions {
 
 
 
-    async sendMessage(message) {
+    async sendMessage(discussionId, messageContent) {
+        const messageObj = await this._createContractMessage(discussionId)
         
+        // TODO: Add contract address
+        const signedMessage = await this._signMessage({ ...messageObj, content: messageContent })
+        console.log('signed message: ', signedMessage)
+
+        this._messagingProvider.post(JSON.stringify(signedMessage))
     }
 
-    async _createContractMessage(discussionId, message) {
+    
+    async _createContractMessage(discussionId) {
         await this._contract.methods.addMessage(discussionId).send({ from: this._accounts[0] })
-        const messageObj = await this._getLastMessage(discussionId)
-        console.log('Last message ', messageObj)
+        return this._getLastMessage(discussionId)
+    }
+
+    async _signMessage(message) {
+        const signature = await this._web3.eth.personal.sign(JSON.stringify(message), this._accounts[0])
+        
+        console.log('sign: ', signature)
+        return {
+            signature,
+            ...message
+        }
     }
 
     async _getLastMessage(discussionId) {
@@ -44,8 +60,7 @@ export class EthDiscussions {
         while (messageId > 0) {
             const message = await this._contract.methods.getMessage(discussionId, messageId).call()
             
-            //console.log('message: ', message)
-
+            // TODO: Add discussionId
             if (message.author === this._accounts[0]) {
                 return { 
                     id: messageId,
@@ -56,19 +71,6 @@ export class EthDiscussions {
             messageId--
         }
     }
-
-    async _signMessage(message) {
-        return new Promise((res, rej) => {
-            this._web3.personal.sign(message, 
-                this._web3.eth.accounts[0], 
-                (err, result) => { 
-                    if (err)
-                        return rej(err)
-                    
-                    return res(result)
-                }
-            )
-        })
-    }    
+ 
 
 }

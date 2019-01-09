@@ -18,7 +18,7 @@ export class WhisperProvider {
     }
 
 
-    async post(message, signature, topic = '0x00000000') {
+    async post(message, topic = '0x00000000') {
         this._shhWeb3.shh.post({
             pubKey: this._opts.pubKey,
             ttl: TTL,
