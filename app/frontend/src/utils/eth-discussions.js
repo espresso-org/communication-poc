@@ -1,8 +1,6 @@
 import DiscussionAppContract from "../contracts/DiscussionApp.json"
 import getWeb3 from './get-web3'
 
-//const Web3 = window.Web3
-//const web3 = window.web3
 
 export class EthDiscussions {
 

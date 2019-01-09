@@ -32,7 +32,7 @@ export class WhisperProvider {
     }
 
     subscribe(topic, cb) {
-        this._shhWeb3.shh.newMessageFilter({
+        this._filterId = this._shhWeb3.shh.newMessageFilter({
             privateKeyID: this._opts.privKey
         }, (err, res) => { 
 
