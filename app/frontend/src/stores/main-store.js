@@ -30,7 +30,7 @@ export class MainStore {
             pubKey: config.whisperPublicKey
         })
 
-        this._ethDiscussion = new EthDiscussions()
+        this._ethDiscussion = new EthDiscussions({ messagingProvider: this._messaging })
     }
 
     @observable currentScreen = ScreenType.DiscussionList

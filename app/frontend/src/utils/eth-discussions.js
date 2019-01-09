@@ -8,17 +8,14 @@ export class EthDiscussions {
 
     constructor(opts = {}) {
         this._opts = opts
-        window.ethDiscussions = this
-        console.log('test')
+        this._messagingProvider = opts.messagingProvider
         this._initialize()
     }
 
     async _initialize() {
-        console.log('waf')
-        //this._web3 = new Web3(web3.currentProvider)
         this._web3 = await getWeb3()
         
-        const accounts = await this._web3.eth.getAccounts()
+        this._accounts = await this._web3.eth.getAccounts()
 
         // Get the contract instance.
         const networkId = await this._web3.eth.net.getId()
@@ -29,8 +26,35 @@ export class EthDiscussions {
         )        
     }    
 
+
+
     async sendMessage(message) {
         
+    }
+
+    async _createContractMessage(discussionId, message) {
+        await this._contract.methods.addMessage(discussionId).send({ from: this._accounts[0] })
+        const messageObj = await this._getLastMessage(discussionId)
+        console.log('Last message ', messageObj)
+    }
+
+    async _getLastMessage(discussionId) {
+        let messageId = (await this._contract.methods.getMessgesCount(0).call()) - 1
+
+        while (messageId > 0) {
+            const message = await this._contract.methods.getMessage(discussionId, messageId).call()
+            
+            //console.log('message: ', message)
+
+            if (message.author === this._accounts[0]) {
+                return { 
+                    id: messageId,
+                    author: message.author
+                }
+            }
+
+            messageId--
+        }
     }
 
     async _signMessage(message) {
