@@ -43,19 +43,6 @@ contract DiscussionApp /*is AragonApp*/ {
     }));
 
   }
-
-
-  function addMessage(uint256 _discussionId) 
-    public
-  {
-    require(discussions[_discussionId].isOpened);
-
-    messages[_discussionId].push(Message({
-      author: msg.sender,
-      timestamp: uint64(now)
-    }));
-  }
-
   
   function getDiscussionsCount() public view returns (uint256) {
     return discussions.length;
@@ -71,5 +58,42 @@ contract DiscussionApp /*is AragonApp*/ {
     isOpened = disc.isOpened;
 
   }
+
+
+
+  /**
+   * Messages
+   */
+
+  function addMessage(uint256 _discussionId) 
+    public
+  {
+    require(discussions[_discussionId].isOpened);
+
+    messages[_discussionId].push(Message({
+      author: msg.sender,
+      timestamp: uint64(now)
+    }));
+  }   
+
+
+  function getMessgesCount(uint256 _discussionId) public view returns (uint256) {
+    return messages[_discussionId].length;
+  }
+
+
+  function getMessage(uint256 _discussionId, uint256 _messageId) 
+    public 
+    view 
+    returns ( address author, uint256 timestamp) 
+  {
+
+    Message memory message = messages[_discussionId][_messageId];
+
+    author = message.author;
+    timestamp = message.timestamp;
+
+  }
+
 
 }
