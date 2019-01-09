@@ -9,11 +9,12 @@ export class EthDiscussions {
     constructor(opts = {}) {
         this._opts = opts
         window.ethDiscussions = this
-
+        console.log('test')
         this._initialize()
     }
 
     async _initialize() {
+        console.log('waf')
         //this._web3 = new Web3(web3.currentProvider)
         this._web3 = await getWeb3()
         
