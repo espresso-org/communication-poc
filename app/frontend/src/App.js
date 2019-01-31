@@ -12,6 +12,7 @@ import {
 } from '@aragon/ui'
 import { DiscussionListScreen } from './components/discussion-list-screen'
 import { DiscussionScreen } from './components/discussion-screen'
+import { NewDiscussionSidePanel } from './components/side-panels/new-discussion'
 
 
 
@@ -38,11 +39,7 @@ class App extends Component {
           currentDiscussion={mainStore.currentDiscussion}
           mainStore={mainStore} 
         />   
-        <SidePanel 
-          title="New Discussion"
-          opened={mainStore.sidePanels.newDiscussion}
-          onClose={() => mainStore.hideNewDiscussionSidePanel()}>
-        </SidePanel>              
+        <NewDiscussionSidePanel mainStore={ mainStore } />             
       </AragonApp>
     )
   }
