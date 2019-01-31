@@ -35,6 +35,13 @@ export class MainStore {
 
     @observable currentScreen = ScreenType.DiscussionList
 
+    @observable sidePanels = {
+        newDiscussion: false
+    }
+
+    @action showNewDiscussionSidePanel() { this.sidePanels.newDiscussion = true }
+    @action hideNewDiscussionSidePanel() { this.sidePanels.newDiscussion = false }
+
     @observable discussions = discussions
 
     @observable messages = {

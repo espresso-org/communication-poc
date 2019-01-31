@@ -6,7 +6,8 @@ import {
   AppBar,
   Button,
   Text,
-  Card
+  Card,
+  SidePanel
 
 } from '@aragon/ui'
 import { DiscussionListScreen } from './components/discussion-list-screen'
@@ -36,7 +37,12 @@ class App extends Component {
           isVisible={mainStore.currentScreen === ScreenType.Discussion} 
           currentDiscussion={mainStore.currentDiscussion}
           mainStore={mainStore} 
-        />                 
+        />   
+        <SidePanel 
+          title="New Discussion"
+          opened={mainStore.sidePanels.newDiscussion}
+          onClose={() => mainStore.hideNewDiscussionSidePanel()}>
+        </SidePanel>              
       </AragonApp>
     )
   }

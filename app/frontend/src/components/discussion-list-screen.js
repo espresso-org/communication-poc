@@ -20,7 +20,12 @@ export const DiscussionListScreen = ({ position, isVisible, mainStore }) =>
                 title="Discussions"
                 endContent={
                     <div>
-                    <Button mode="strong">New Discussion</Button>
+                    <Button 
+                        mode="strong" 
+                        onClick={() => mainStore.showNewDiscussionSidePanel()}
+                    >
+                        New Discussion
+                    </Button>
                     </div>
                 }
                 />      
