@@ -2,6 +2,7 @@ import React from 'react'
 import { Screen } from './screen'
 import { AppLayout } from './app-layout'
 import { DiscussionCard } from './discussion-card'
+import { observer } from 'mobx-react'
 import {
     AragonApp,
     AppBar,
@@ -12,7 +13,7 @@ import {
   } from '@aragon/ui'
 
 
-export const DiscussionListScreen = ({ position, isVisible, mainStore }) => 
+export const DiscussionListScreen = observer(['mainStore'], ({ position, isVisible, mainStore }) => 
     <Screen position={position} animate>
         {isVisible && (
             <span>
@@ -44,3 +45,4 @@ export const DiscussionListScreen = ({ position, isVisible, mainStore }) =>
             </span>
         )}
     </Screen>     
+)

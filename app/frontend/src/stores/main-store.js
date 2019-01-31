@@ -42,6 +42,18 @@ export class MainStore {
     @action showNewDiscussionSidePanel() { this.sidePanels.newDiscussion = true }
     @action hideNewDiscussionSidePanel() { this.sidePanels.newDiscussion = false }
 
+    @action createDiscussion(opts = {}) {
+        console.log('new discussion')
+        this.discussions.push({
+            id: this.discussions.length,
+            title: opts.title,
+            description: opts.description,
+            commentsCount: 2,
+            stakedTokens: 34,
+            date: new Date()
+        })
+    }
+
     @observable discussions = discussions
 
     @observable messages = {
