@@ -3,6 +3,7 @@ import { Screen } from './screen'
 import { AppLayout } from './app-layout'
 import { DiscussionCard } from './discussion-card'
 import { observer } from 'mobx-react'
+import styled from 'styled-components'
 import {
     AragonApp,
     AppBar,
@@ -34,15 +35,24 @@ export const DiscussionListScreen = observer(['mainStore'], ({ position, isVisib
                     <AppLayout.Content>           
                         <Text size="xlarge">Open Discussions</Text>
                         <br />
+                        <Discussions>
                         {mainStore.discussions.map(discussion => 
                             <DiscussionCard 
                                 discussion={discussion} 
                                 onOpenClick={() => mainStore.openDiscussion(discussion.id)}
                             />
                         )}
+                        </Discussions>
                     </AppLayout.Content>
                 </AppLayout.ScrollWrapper>
             </span>
         )}
     </Screen>     
 )
+
+
+const Discussions = styled.div`
+    display: flex;
+    flex-direction: row;
+    margin-left: -8px;
+`

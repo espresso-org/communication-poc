@@ -48,6 +48,7 @@ const Main = styled(Card)`
     flex-direction: column;
     align-items: center;
     justify-content: stretch;    
+    margin: 0 8px;
 `
 
 const Title = styled(Text)

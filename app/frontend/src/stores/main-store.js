@@ -16,6 +16,14 @@ const discussions = [{
     commentsCount: 2,
     stakedTokens: 34,
     date: new Date('2018-12-31')
+},
+{
+    id: 1,
+    title: 'Test title2',
+    description: 'Should we upgrade the voting app to v2?',
+    commentsCount: 2,
+    stakedTokens: 34,
+    date: new Date('2018-12-31')
 }]
 
 
