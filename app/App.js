@@ -22,7 +22,7 @@ export default class App extends React.Component {
         <div>
           <ObservedCount observable={this.props.observable} />
           <Button onClick={() => this.props.app.decrement(1)}>Decrement</Button>
-          <Button onClick={() => this.props.app.increment(1)}>Increment</Button>
+          <Button onClick={() => this.props.app.increment(1)}>Increment2</Button>
         </div>
       </AppContainer>
     )
