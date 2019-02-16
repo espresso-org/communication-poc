@@ -1,13 +1,23 @@
 import React from 'react'
+import { observer } from 'mobx-react'
+import { AppLayout } from './components/app-layout'
 import {
   AragonApp,
+  AppBar,
   Button,
   Text,
-
+  Card,
+  SidePanel,
   observe
 } from '@aragon/ui'
+import { DiscussionListScreen } from './components/discussion-list-screen'
+import { DiscussionScreen } from './components/discussion-screen'
+import { NewDiscussionSidePanel } from './components/side-panels/new-discussion'
 import Aragon, { providers } from '@aragon/client'
 import styled from 'styled-components'
+import { MainStore, ScreenType } from './stores/main-store'
+
+const mainStore = new MainStore()
 
 const AppContainer = styled(AragonApp)`
   display: flex;
@@ -19,11 +29,14 @@ export default class App extends React.Component {
   render () {
     return (
       <AppContainer>
-        <div>
-          <ObservedCount observable={this.props.observable} />
-          <Button onClick={() => this.props.app.decrement(1)}>Decrement</Button>
-          <Button onClick={() => this.props.app.increment(1)}>Increment2</Button>
-        </div>
+        
+        <DiscussionListScreen 
+          position={0}
+          isVisible={mainStore.currentScreen === ScreenType.DiscussionList} 
+          mainStore={mainStore} 
+        />           
+        {/*<NewDiscussionSidePanel mainStore={ mainStore } />  */}
+        hrt  
       </AppContainer>
     )
   }
