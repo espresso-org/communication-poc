@@ -34,17 +34,17 @@ export default class App extends React.Component {
           position={0}
           isVisible={mainStore.currentScreen === ScreenType.DiscussionList} 
           mainStore={mainStore} 
-        />           
-        {/*<NewDiscussionSidePanel mainStore={ mainStore } />  */}
-        hrt  
+        />  
+
+        <DiscussionScreen 
+          position={1}
+          isVisible={mainStore.currentScreen === ScreenType.Discussion} 
+          currentDiscussion={mainStore.currentDiscussion}
+          mainStore={mainStore} 
+        />            
+        <NewDiscussionSidePanel mainStore={ mainStore } /> 
       </AppContainer>
     )
   }
 }
 
-const ObservedCount = observe(
-  (state$) => state$,
-  { count: 0 }
-)(
-  ({ count }) => <Text.Block style={{ textAlign: 'center' }} size='xxlarge'>{count}</Text.Block>
-)

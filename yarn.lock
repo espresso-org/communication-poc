@@ -10353,7 +10353,7 @@ web3@^0.20.6:
     xhr2-cookies "^1.1.0"
     xmlhttprequest "*"
 
-web3@^1.0.0-beta.34:
+web3@^1.0.0-beta.34, web3@^1.0.0-beta.37:
   version "1.0.0-beta.46"
   resolved "https://registry.yarnpkg.com/web3/-/web3-1.0.0-beta.46.tgz#03b5eb25e4ca1130f4775e43964c19dad2aecdc2"
   dependencies:

@@ -2,7 +2,7 @@
 
 import getWeb3 from '../utils/get-web3-custom'
 
-const Web3 = window.Web3
+//const Web3 = window.Web3
 const TTL = 60 * 60 // TTL of messages in seconds (1 hour)
 const POW_TARGET = 0.2
 const POW_TIME = 60
@@ -19,7 +19,7 @@ export class WhisperProvider {
     async _initialize() {
         this._shhWeb3 = await getWeb3(this._opts.host)
         this._accounts = await this._shhWeb3.eth.getAccounts()
-        await this._shhWeb3.eth.personal.unlockAccount(this._accounts[0], this._opts.accountPassword)
+        await this._shhWeb3.eth.personal.unlockAccount(this._accounts[0], this._opts.accountPassword, 3600)
     }
 
 

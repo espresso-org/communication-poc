@@ -1,7 +1,7 @@
 import { observable, action, computed } from 'mobx'
 import { fromPromise } from 'mobx-utils'
 import config from '../config'
-//import { WhisperProvider } from '../messaging-provider/whisper'
+import { WhisperProvider } from '../messaging-provider/whisper'
 //import { EthDiscussions } from '../utils/eth-discussions'
 
 export const ScreenType = {
@@ -31,13 +31,13 @@ const discussions = [{
 export class MainStore {
 
     constructor() {
-        /*
+        
         this._messaging = new WhisperProvider({ 
             host: config.whisperHost,
             accountPassword: config.whisperAccountPass,
             privKey: config.whisperPrivateKey,
             pubKey: config.whisperPublicKey
-        })*/
+        })
 
         //this._ethDiscussion = new EthDiscussions({ messagingProvider: this._messaging })
     }
