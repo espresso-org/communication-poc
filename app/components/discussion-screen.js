@@ -43,11 +43,7 @@ export const DiscussionScreen = observer(({ position, isVisible, currentDiscussi
                                 <MainContent>
                                     <Title size="xlarge">{currentDiscussion.value.title}</Title>
                                     <Discussions>
-                                        {mainStore.currentDiscussionMessages.state === 'pending' &&
-                                            <div>Loading...</div>
-                                        }
-                                        {mainStore.currentDiscussionMessages.value &&
-                                            mainStore.currentDiscussionMessages.value.map(message =>
+                                        {   mainStore.currentDiscussionMessages.value.map(message =>
                                                 <Message message={message} />
                                             )
                                         }                                        

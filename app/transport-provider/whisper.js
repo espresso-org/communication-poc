@@ -1,4 +1,5 @@
 import getWeb3 from '../utils/get-web3-custom'
+import { Observable } from 'rxjs'
 import config from '../config'
 
 const TTL = 60 * 60 // TTL of messages in seconds (1 hour)
@@ -36,21 +37,22 @@ export class WhisperProvider {
         })  
     }
 
-    subscribe(cb) {
-        this._web3.shh.subscribe('messages', {
-            symKeyID: config.symKeyId,
-            topics: [DEFAULT_TOPIC]
-        }, (err, res, g) => { 
-            if (err)
-                console.log('err: ', err)
-                     
-            cb({
-                ...res,
-                message: this._web3.utils.toUtf8(res.payload)
-            })
-        }
-        
-        )
+    messages() {
+        return Observable.create(observer => {
+            this._web3.shh.subscribe('messages', {
+                symKeyID: config.symKeyId,
+                topics: [DEFAULT_TOPIC]
+            }, (err, res, g) => { 
+                if (err)
+                    console.log('err: ', err)
+
+                else {        
+                    observer.next(this._web3.utils.toUtf8(res.payload))
+                }
+            }
+            
+            )
+        })
     }    
 
     

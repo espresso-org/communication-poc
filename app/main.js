@@ -1,10 +1,14 @@
 import '@babel/polyfill'
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Aragon, { providers } from '@aragon/client'
 import { Provider } from 'mobx-react'
+
+import config from './config'
 import { MainStore } from './stores/main-store'
+import { DiscussionStore } from './stores/discussion-store'
+import { EthDiscussions } from './utils/eth-discussions'
+import { WhisperProvider } from './transport-provider/whisper'
 import App from './App'
 
 
@@ -45,7 +49,14 @@ ReactDOM.render(
 function getInjectedObjects() {
   const aragonApp = new Aragon(new providers.WindowMessage(window.parent))
 
-  const mainStore = new MainStore(aragonApp)
+  const transportProvider = new WhisperProvider({ 
+      host: config.whisperHost
+  })
 
-  return { aragonApp, mainStore }
+  const discussionsController = new EthDiscussions({ transportProvider, aragonApp })  
+
+  const discussionStore = new DiscussionStore(discussionsController)
+  const mainStore = new MainStore(aragonApp, discussionStore)
+
+  return { aragonApp, mainStore, discussionStore }
 }

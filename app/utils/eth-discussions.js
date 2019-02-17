@@ -15,12 +15,18 @@ export class EthDiscussions {
      
     }    
 
+    messages(discussionId) {
+        return this._transportProvider
+            .messages()
+            .map(this._decodeMessage)
+            .filter(message => message.discussionId === discussionId)
+    }
 
     async sendMessage(message) {
         const signedMessage = await this.signMessage(message)
 
         if (this._validatePreSend(signedMessage))
-            this._transportProvider.post(JSON.stringify(signedMessage))
+            this._transportProvider.post(this._encodeMessage(signedMessage))
     }
 
 
@@ -40,6 +46,9 @@ export class EthDiscussions {
         
     }
 
+
+    _decodeMessage = JSON.parse
+    _encodeMessage = JSON.stringify
 
     _validatePreSend(message) {
         // TODO: Message validation

@@ -30,15 +30,18 @@ const discussions = [{
 
 export class MainStore {
 
-    constructor(aragonApp) {
+    constructor(aragonApp, discussionsController, discussionStore) {
         this._app = aragonApp
 
-        this._transport = new WhisperProvider({ 
-            host: config.whisperHost,
-            accountPassword: config.whisperAccountPass
-        })
+        this._ethDiscussion = discussionsController
+        this._discussionStore = discussionStore
 
-        this._ethDiscussion = new EthDiscussions({ transportProvider: this._transport, aragonApp })
+        window.mainStore = this
+    }
+
+    async _initialize() {
+
+
         window.mainStore = this
     }
 
@@ -66,12 +69,8 @@ export class MainStore {
     @observable discussions = discussions
 
     @observable messages = {
-        0: [{
-            author: '0xb4124cEB3451635DAcedd11767f004d8a28c6eE7',
-            content: 'This is my first message',
-            date: new Date('2019-01-02')
-        }
-        ]
+        0: [],
+        1: []
     }
 
     @observable currentMessageText = ''
@@ -84,7 +83,7 @@ export class MainStore {
     }
 
     @computed get currentDiscussionMessages() {
-        return fromPromise(new Promise(res => res(this.messages[this.currentDiscussionId])))
+        return this.messages[this.currentDiscussionId] || []
     }
 
     @action setCurrentScreen(screenType) {
@@ -114,4 +113,6 @@ export class MainStore {
 
         this.currentMessageText = ''
     }
+
+
 }
