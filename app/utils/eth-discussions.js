@@ -29,11 +29,6 @@ export class EthDiscussions {
 
     async _signMessage(message) {
 
-        //const signature = await sign(message, this._app)
-
-        //const signature = await this._web3.eth.personal.sign(JSON.stringify(message), this._accounts[0])
-        
-        //console.log('sign: ', signature)
         return {
             ...message,
             signature: await this._app
@@ -47,6 +42,8 @@ export class EthDiscussions {
                     signature: signatureTemplate(message)
                 }))
                 .mergeMap(message => this._app.rpc.sendAndObserveResponses('sign', [message.signature, message.author]))
+                .take(1)
+                .pluck('result')
                 .toPromise()
         }
     }
@@ -57,6 +54,6 @@ export class EthDiscussions {
 }
 
 const signatureTemplate = ({ author, content }) => `
-${author}
-${content}
+Author: ${author}
+Content: ${content}
 `
