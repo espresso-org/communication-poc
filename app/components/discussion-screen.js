@@ -3,20 +3,11 @@ import styled from 'styled-components'
 import { Screen } from './screen'
 import { AppLayout } from './app-layout'
 import { ScreenType } from '../stores/main-store'
-import {
-    AragonApp,
-    AppBar,
-    Button,
-    Card,
-    Text,
-    TextInput
-  
-  } from '@aragon/ui'
+import { AppBar, Text, TextInput } from '@aragon/ui'
 import { BackButton } from './back-button'
 import { observer, inject } from 'mobx-react'
 import { SideBar } from './side-bar'
 import { Message } from './message'
-import main from 'react-blockies';
 
 
 export const DiscussionScreen = 

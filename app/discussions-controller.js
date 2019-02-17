@@ -1,7 +1,7 @@
-import sign from './sign'
+import sign from './utils/sign'
 
 
-export class EthDiscussions {
+export class DiscussionsController {
 
     constructor(opts = {}) {
         this._opts = opts

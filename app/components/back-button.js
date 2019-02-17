@@ -23,6 +23,7 @@ const Main = styled.span`
   align-items: center;
   height: 63px;
   margin: 0 30px;
+  margin-left: -30px;
   cursor: pointer;
   svg path {
     stroke: hsl(179, 76%, 48%);
