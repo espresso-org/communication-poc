@@ -91,6 +91,7 @@ export class MainStore {
     }
 
     @action openDiscussion(discussionId) {
+        this._discussionStore.setCurrentDiscussion(discussionId)
         this.currentDiscussionId = discussionId
         this.currentScreen = ScreenType.Discussion
     }

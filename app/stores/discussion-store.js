@@ -1,4 +1,5 @@
 import { observable, action, computed } from 'mobx'
+import { fromPromise } from 'mobx-utils'
 
 export class DiscussionStore {
 

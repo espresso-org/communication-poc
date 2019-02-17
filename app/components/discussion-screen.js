@@ -13,13 +13,15 @@ import {
   
   } from '@aragon/ui'
 import { BackButton } from './back-button'
-import { observer } from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 import { SideBar } from './side-bar'
 import { Message } from './message'
 import main from 'react-blockies';
 
 
-export const DiscussionScreen = observer(({ position, isVisible, currentDiscussion, mainStore }) => 
+export const DiscussionScreen = 
+inject('mainStore', 'discussionStore')(
+observer(({ position, isVisible, mainStore, discussionStore }) => 
     <Screen position={position} animate>
         {isVisible && (
             <Main>
@@ -32,18 +34,18 @@ export const DiscussionScreen = observer(({ position, isVisible, currentDiscussi
                 
                 
                 <Wrapper>
-                    {currentDiscussion.state === 'pending' &&
+                    {discussionStore.currentDiscussion.state === 'pending' &&
                         <AppLayout.Content>           
                         Loading...   
                         </AppLayout.Content>
                     }                        
-                    { currentDiscussion.value && 
+                    {discussionStore.currentDiscussion.value && 
                         <Content> 
                             <TwoPanels>
                                 <MainContent>
-                                    <Title size="xlarge">{currentDiscussion.value.title}</Title>
+                                    <Title size="xlarge">{discussionStore.currentDiscussion.value.title}</Title>
                                     <Discussions>
-                                        {   mainStore.currentDiscussionMessages.value.map(message =>
+                                        {   discussionStore.messages.map(message =>
                                                 <Message message={message} />
                                             )
                                         }                                        
@@ -64,7 +66,8 @@ export const DiscussionScreen = observer(({ position, isVisible, currentDiscussi
             </Main>
         )}
     </Screen>  
-)   
+))
+
 
 function onEnterKeyPress(cb) {
     return e => e.key === 'Enter' && cb()

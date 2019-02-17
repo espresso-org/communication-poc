@@ -56,7 +56,7 @@ function getInjectedObjects() {
   const discussionsController = new EthDiscussions({ transportProvider, aragonApp })  
 
   const discussionStore = new DiscussionStore(discussionsController)
-  const mainStore = new MainStore(aragonApp, discussionStore)
+  const mainStore = new MainStore(aragonApp, discussionsController, discussionStore)
 
   return { aragonApp, mainStore, discussionStore }
 }
