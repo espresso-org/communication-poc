@@ -24,28 +24,26 @@ export class WhisperProvider {
 
 
 
-    async post(message, topic = DEFAULT_TOPIC) {
+    async post(message) {
         this._web3.shh.post({
             symKeyID: config.symKeyId,
             ttl: TTL,
-            topic: topic,
-            topics: [topic],
+            topic: DEFAULT_TOPIC,
+            topics: [DEFAULT_TOPIC],
             powTarget: POW_TARGET,
             powTime: POW_TIME,
             payload: this._web3.utils.fromUtf8(message)
         })  
     }
 
-    subscribe(topic = DEFAULT_TOPIC, cb) {
-        this._filterId = this._web3.shh.subscribe('messages', {
+    subscribe(cb) {
+        this._web3.shh.subscribe('messages', {
             symKeyID: config.symKeyId,
-            topics: [topic]
+            topics: [DEFAULT_TOPIC]
         }, (err, res, g) => { 
             if (err)
                 console.log('err: ', err)
-            
-            console.log('g: ', res)
-            
+                     
             cb({
                 ...res,
                 message: this._web3.utils.toUtf8(res.payload)

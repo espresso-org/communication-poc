@@ -5,7 +5,7 @@ export class EthDiscussions {
 
     constructor(opts = {}) {
         this._opts = opts
-        this._messagingProvider = opts.messagingProvider
+        this._transportProvider = opts.transportProvider
         this._app = opts.aragonApp
 
         this._initialize()
@@ -20,7 +20,7 @@ export class EthDiscussions {
         const signedMessage = await this.signMessage(message)
 
         if (this._validatePreSend(signedMessage))
-            this._messagingProvider.post(JSON.stringify(signedMessage))
+            this._transportProvider.post(JSON.stringify(signedMessage))
     }
 
 

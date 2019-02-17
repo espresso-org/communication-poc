@@ -1,7 +1,7 @@
 import { observable, action, computed } from 'mobx'
 import { fromPromise } from 'mobx-utils'
 import config from '../config'
-import { WhisperProvider } from '../messaging-provider/whisper'
+import { WhisperProvider } from '../transport-provider/whisper'
 import { EthDiscussions } from '../utils/eth-discussions'
 
 export const ScreenType = {
@@ -33,12 +33,12 @@ export class MainStore {
     constructor(aragonApp) {
         this._app = aragonApp
 
-        this._messaging = new WhisperProvider({ 
+        this._transport = new WhisperProvider({ 
             host: config.whisperHost,
             accountPassword: config.whisperAccountPass
         })
 
-        this._ethDiscussion = new EthDiscussions({ messagingProvider: this._messaging, aragonApp })
+        this._ethDiscussion = new EthDiscussions({ transportProvider: this._transport, aragonApp })
         window.mainStore = this
     }
 
