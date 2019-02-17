@@ -1,8 +1,4 @@
 import { observable, action, computed } from 'mobx'
-import { fromPromise } from 'mobx-utils'
-import config from '../config'
-import { WhisperProvider } from '../transport-provider/whisper'
-import { EthDiscussions } from '../utils/eth-discussions'
 
 export const ScreenType = {
     DiscussionList: 'DiscussionList',
@@ -39,12 +35,6 @@ export class MainStore {
         window.mainStore = this
     }
 
-    async _initialize() {
-
-
-        window.mainStore = this
-    }
-
     @observable currentScreen = ScreenType.DiscussionList
 
     @observable sidePanels = {
@@ -67,53 +57,17 @@ export class MainStore {
     }
 
     @observable discussions = discussions
-
-    @observable messages = {
-        0: [],
-        1: []
-    }
-
-    @observable currentMessageText = ''
-
-    
-    @observable currentDiscussionId
-
-    @computed get currentDiscussion() {
-        return fromPromise(new Promise(res => res(this.discussions[this.currentDiscussionId])))
-    }
-
-    @computed get currentDiscussionMessages() {
-        return this.messages[this.currentDiscussionId] || []
-    }
-
+   
     @action setCurrentScreen(screenType) {
         this.currentScreen = screenType
     }
 
     @action openDiscussion(discussionId) {
         this._discussionStore.setCurrentDiscussion(discussionId)
-        this.currentDiscussionId = discussionId
-        this.currentScreen = ScreenType.Discussion
+        this.setCurrentScreen(ScreenType.Discussion)
     }
 
-    @action sendMessage() {
 
-        if (!this.messages[this.currentDiscussionId])
-            this.messages[this.currentDiscussionId] = []
-        /*
-        this.messages[this.currentDiscussionId].push({
-            author: '0xb4124cEB3451635DAcedd11767f004d8a28c6eE7',
-            content: message.content,
-            date: new Date('2019-01-02')
-        })*/
-
-        this._ethDiscussion.sendMessage({ 
-            discussionId: this.currentDiscussionId,
-            content: this.currentMessageText 
-        })
-
-        this.currentMessageText = ''
-    }
 
 
 }

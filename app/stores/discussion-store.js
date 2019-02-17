@@ -9,9 +9,12 @@ export class DiscussionStore {
 
     @observable currentDiscussionId
     @observable messages = []
+    @observable currentMessageText = ''
     
     @computed get currentDiscussion() {
-        return fromPromise(new Promise(res => res(this.discussions[this.currentDiscussionId])))
+        return fromPromise(new Promise(res => 
+            res(this.discussions[this.currentDiscussionId])
+        ))
     }
 
     @action setCurrentDiscussion(discussionId) {
@@ -21,31 +24,22 @@ export class DiscussionStore {
         this._ctl
             .messages(discussionId)
             .takeWhile(() => this.currentDiscussionId === discussionId)
-            .subscribe(this._onNewMessage)
+            .subscribe(msg => this._onNewMessage(msg))
     }
 
+    @action sendMessage() {
+        this._ctl.sendMessage({ 
+            discussionId: this.currentDiscussionId,
+            content: this.currentMessageText 
+        })
 
-    _onNewMessage = msg => {
+        this.currentMessageText = ''
+    }    
+
+
+    _onNewMessage(msg) {
         this.messages.push(msg)
     }
 
 
 }
-
-
-const discussions = [{
-    id: 0,
-    title: 'Test title',
-    description: 'Should we upgrade the voting app to v2?',
-    commentsCount: 2,
-    stakedTokens: 34,
-    date: new Date('2018-12-31')
-},
-{
-    id: 1,
-    title: 'Test title2',
-    description: 'Should we upgrade the voting app to v2?',
-    commentsCount: 2,
-    stakedTokens: 34,
-    date: new Date('2018-12-31')
-}]

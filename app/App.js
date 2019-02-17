@@ -31,8 +31,6 @@ export default class App extends React.Component {
         <DiscussionScreen 
           position={1}
           isVisible={mainStore.currentScreen === ScreenType.Discussion} 
-          currentDiscussion={mainStore.currentDiscussion}
-          mainStore={mainStore} 
         />            
         <NewDiscussionSidePanel mainStore={ mainStore } /> 
       </AppContainer>

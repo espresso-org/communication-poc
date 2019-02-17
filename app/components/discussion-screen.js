@@ -52,9 +52,9 @@ observer(({ position, isVisible, mainStore, discussionStore }) =>
                                     </Discussions>
                                     <MainTextInput 
                                         placeholder="Enter your message..."
-                                        value={mainStore.currentMessageText} 
-                                        onChange={e => mainStore.currentMessageText = e.currentTarget.value} 
-                                        onKeyPress={onEnterKeyPress(() => mainStore.sendMessage())}
+                                        value={discussionStore.currentMessageText} 
+                                        onChange={e => discussionStore.currentMessageText = e.currentTarget.value} 
+                                        onKeyPress={onEnterKeyPress(() => discussionStore.sendMessage())}
                                     />
                                 </MainContent>
                                 <SideBar />
