@@ -66,8 +66,5 @@ export class MainStore {
         this._discussionStore.setCurrentDiscussion(discussionId)
         this.setCurrentScreen(ScreenType.Discussion)
     }
-
-
-
-
+    
 }
