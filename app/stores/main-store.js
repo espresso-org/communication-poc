@@ -96,17 +96,21 @@ export class MainStore {
         this.currentScreen = ScreenType.Discussion
     }
 
-    @action sendMessage(message, discussionId) {
-        if (!this.messages[discussionId])
-            this.messages[discussionId] = []
+    @action sendMessage() {
 
-        this.messages[discussionId].push({
+        if (!this.messages[this.currentDiscussionId])
+            this.messages[this.currentDiscussionId] = []
+        /*
+        this.messages[this.currentDiscussionId].push({
             author: '0xb4124cEB3451635DAcedd11767f004d8a28c6eE7',
             content: message.content,
             date: new Date('2019-01-02')
-        })
+        })*/
 
-        this._ethDiscussion.sendMessage(discussionId, message.content)
+        this._ethDiscussion.sendMessage({ 
+            discussionId: this.currentDiscussionId,
+            content: this.currentMessageText 
+        })
 
         this.currentMessageText = ''
     }

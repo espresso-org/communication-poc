@@ -56,7 +56,7 @@ export const DiscussionScreen = observer(({ position, isVisible, currentDiscussi
                                         placeholder="Enter your message..."
                                         value={mainStore.currentMessageText} 
                                         onChange={e => mainStore.currentMessageText = e.currentTarget.value} 
-                                        onKeyPress={onEnterKeyPress(() => mainStore.sendMessage({ content: mainStore.currentMessageText }, mainStore.currentDiscussionId ))}
+                                        onKeyPress={onEnterKeyPress(() => mainStore.sendMessage())}
                                     />
                                 </MainContent>
                                 <SideBar />

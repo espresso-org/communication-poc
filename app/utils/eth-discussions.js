@@ -16,40 +16,35 @@ export class EthDiscussions {
     }    
 
 
-    async sendMessage(discussionId, messageContent) {
-        const messageObj = { discussionId, content: messageContent }
-        console.log('signing ', messageObj)
-        const signedMessage = await this._signMessage(messageObj)
-        console.log('signed message: ', signedMessage)
+    async sendMessage(message) {
+        const signedMessage = await this.signMessage(message)
 
-        this._messagingProvider.post(JSON.stringify(signedMessage))
+        if (this._validatePreSend(signedMessage))
+            this._messagingProvider.post(JSON.stringify(signedMessage))
     }
 
 
 
-    async _signMessage(message) {
+    async signMessage(message) {
 
-        return {
-            ...message,
-            signature: await this._app
-                .accounts()
-                .map(accounts => ({
-                    ...message,
-                    author: accounts[0]
-                }))
-                .map(message => ({
-                    ...message,
-                    signature: signatureTemplate(message)
-                }))
-                .mergeMap(message => this._app.rpc.sendAndObserveResponses('sign', [message.signature, message.author]))
-                .take(1)
-                .pluck('result')
-                .toPromise()
-        }
+        return this._app
+            .accounts()
+            .map(accounts => ({ ...message, author: accounts[0] }))
+            .map(message => ({ ...message, signature: signatureTemplate(message) }))
+            .map(async message => ({
+                ...message,
+                signature: await sign(message.signature, message.author, this._app)
+            }))
+            .take(1)
+            .toPromise()
+        
     }
 
 
- 
+    _validatePreSend(message) {
+        // TODO: Message talidation
+        return true
+    }
 
 }
 
