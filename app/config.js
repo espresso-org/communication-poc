@@ -1,5 +1,4 @@
 export default {
-    whisperHost: 'http://localhost:8546',
-    whisperAccountPass: 'alliance6',
-    symKeyId: '2072360aae2e1944f02d2a018d43d46bdf0ef76a695973a3503438ef8c338e84'
+    whisperHost: 'ws://localhost:8547',
+    symKeyId: '0968cf6e74a5bf178fd21b775595148d03960b4c4e8505c5666edc202ab20f0a'
 }

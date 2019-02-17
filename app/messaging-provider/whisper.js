@@ -16,27 +16,28 @@ export class WhisperProvider {
     }
 
     async _initialize() {
-        this._shhWeb3 = await getWeb3(this._opts.host)
-        this._accounts = await this._shhWeb3.eth.getAccounts()
-        await this._shhWeb3.eth.personal.unlockAccount(this._accounts[0], this._opts.accountPassword, 3600)
+        this._web3 = await getWeb3(this._opts.host)
+
+        //this._symKeyId = await this._web3.shh.newSymKey()
+
     }
 
 
 
     async post(message, topic = DEFAULT_TOPIC) {
-        this._shhWeb3.shh.post({
+        this._web3.shh.post({
             symKeyID: config.symKeyId,
             ttl: TTL,
             topic: topic,
             topics: [topic],
             powTarget: POW_TARGET,
             powTime: POW_TIME,
-            payload: this._shhWeb3.utils.fromUtf8(message)
+            payload: this._web3.utils.fromUtf8(message)
         })  
     }
 
     subscribe(topic = DEFAULT_TOPIC, cb) {
-        this._filterId = this._shhWeb3.shh.subscribe('messages', {
+        this._filterId = this._web3.shh.subscribe('messages', {
             symKeyID: config.symKeyId,
             topics: [topic]
         }, (err, res, g) => { 
@@ -47,65 +48,14 @@ export class WhisperProvider {
             
             cb({
                 ...res,
-                message: this._shhWeb3.utils.toUtf8(res.payload)
+                message: this._web3.utils.toUtf8(res.payload)
             })
         }
         
         )
     }    
 
-    /*
-    newMessageFilter(topic, cb) {
-        this._filterId = this._shhWeb3.shh.newMessageFilter({
-            symKeyID: "ef2f34bf51b2d9b28caeac4a774ca9682136ab79d709c8a738700909a7d1799b",
-            topics: ['0x00000001']
-        }, (err, res, g) => { 
-            if (err)
-                console.log('err: ', err)
-            
-            console.log('g: ', res)
-            
-            cb({
-                ...res,
-                //message: this._shhWeb3.utils.toUtf8(res.payload)
-            })
-        }
-        
-        )
-    }*/
-
-
-/*
-    async post(message, topic = '0x00000000') {
-        this._shhWeb3.shh.post({
-            pubKey: this._opts.pubKey,
-            ttl: TTL,
-            topic,
-            powTarget: POW_TARGET,
-            powTime: POW_TIME,
-            payload: this._shhWeb3.utils.fromUtf8(message)
-        })  
-    }
-
-    subscribe(topic, cb) {
-        this._filterId = this._shhWeb3.shh.newMessageFilter({
-            privateKeyID: this._opts.privKey
-        }, (err, res, g) => { 
-            if (err)
-                console.log('err: ', err)
-            
-            console.log('g: ', res)
-            
-            cb({
-                ...res,
-                //message: this._shhWeb3.utils.toUtf8(res.payload)
-            })
-        }
-        
-        )
-    }
-*/
-
+    
 
 }
 

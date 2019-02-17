@@ -42,7 +42,7 @@ export class EthDiscussions {
 
 
     _validatePreSend(message) {
-        // TODO: Message talidation
+        // TODO: Message validation
         return true
     }
 
