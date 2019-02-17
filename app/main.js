@@ -3,15 +3,15 @@ import '@babel/polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Aragon, { providers } from '@aragon/client'
+import { Provider } from 'mobx-react'
+import { MainStore } from './stores/main-store'
 import App from './App'
 
+
 class ConnectedApp extends React.Component {
-  state = {
-    app: new Aragon(new providers.WindowMessage(window.parent)),
-    observable: null,
-    userAccount: '',
-  }
+
   componentDidMount() {
+
     window.addEventListener('message', this.handleWrapperMessage)
 
     // If using Parcel, reload instead of using HMR.
@@ -26,33 +26,26 @@ class ConnectedApp extends React.Component {
   componentWillUnmount() {
     window.removeEventListener('message', this.handleWrapperMessage)
   }
-  // handshake between Aragon Core and the iframe,
-  // since iframes can lose messages that were sent before they were ready
-  handleWrapperMessage = ({ data }) => {
-    if (data.from !== 'wrapper') {
-      return
-    }
-    if (data.name === 'ready') {
-      const { app } = this.state
-      this.sendMessageToWrapper('ready', true)
-      this.setState({
-        observable: app.state(),
-      })
-      app.accounts().subscribe(accounts => {
-        this.setState({
-          userAccount: accounts[0],
-        })
-      })
-    }
-  }
-  sendMessageToWrapper = (name, value) => {
-    window.parent.postMessage({ from: 'app', name, value }, '*')
-  }
+
   render() {
-    return <App {...this.state} />
+    return (
+      <Provider {...getInjectedObjects()}>
+        <App />
+      </Provider>
+    )
   }
 }
 ReactDOM.render(
   <ConnectedApp />,
   document.getElementById('root')
 )
+
+
+
+function getInjectedObjects() {
+  const aragonApp = new Aragon(new providers.WindowMessage(window.parent))
+
+  const mainStore = new MainStore(aragonApp)
+
+  return { aragonApp, mainStore }
+}

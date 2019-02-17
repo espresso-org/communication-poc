@@ -2,7 +2,7 @@ import { observable, action, computed } from 'mobx'
 import { fromPromise } from 'mobx-utils'
 import config from '../config'
 import { WhisperProvider } from '../messaging-provider/whisper'
-//import { EthDiscussions } from '../utils/eth-discussions'
+import { EthDiscussions } from '../utils/eth-discussions'
 
 export const ScreenType = {
     DiscussionList: 'DiscussionList',
@@ -30,16 +30,16 @@ const discussions = [{
 
 export class MainStore {
 
-    constructor() {
-        
+    constructor(aragonApp) {
+        this._app = aragonApp
+
         this._messaging = new WhisperProvider({ 
             host: config.whisperHost,
-            accountPassword: config.whisperAccountPass,
-            privKey: config.whisperPrivateKey,
-            pubKey: config.whisperPublicKey
+            accountPassword: config.whisperAccountPass
         })
 
-        //this._ethDiscussion = new EthDiscussions({ messagingProvider: this._messaging })
+        this._ethDiscussion = new EthDiscussions({ messagingProvider: this._messaging, aragonApp })
+        window.mainStore = this
     }
 
     @observable currentScreen = ScreenType.DiscussionList
@@ -97,6 +97,9 @@ export class MainStore {
     }
 
     @action sendMessage(message, discussionId) {
+        if (!this.messages[discussionId])
+            this.messages[discussionId] = []
+
         this.messages[discussionId].push({
             author: '0xb4124cEB3451635DAcedd11767f004d8a28c6eE7',
             content: message.content,

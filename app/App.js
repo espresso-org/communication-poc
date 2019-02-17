@@ -1,5 +1,5 @@
 import React from 'react'
-import { observer } from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 import { AppLayout } from './components/app-layout'
 import {
   AragonApp,
@@ -14,10 +14,8 @@ import { DiscussionListScreen } from './components/discussion-list-screen'
 import { DiscussionScreen } from './components/discussion-screen'
 import { NewDiscussionSidePanel } from './components/side-panels/new-discussion'
 import Aragon, { providers } from '@aragon/client'
+import { ScreenType } from './stores/main-store'
 import styled from 'styled-components'
-import { MainStore, ScreenType } from './stores/main-store'
-
-const mainStore = new MainStore()
 
 const AppContainer = styled(AragonApp)`
   display: flex;
@@ -25,8 +23,11 @@ const AppContainer = styled(AragonApp)`
   justify-content: center;
 `
 
+@inject(['mainStore'])
+@observer
 export default class App extends React.Component {
   render () {
+    const { mainStore } = this.props
     return (
       <AppContainer>
         
