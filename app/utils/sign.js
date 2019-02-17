@@ -1,7 +1,6 @@
 export default async function(data, aragonApp) {
-    const accounts = await aragonApp.accounts().toPromise()
-
-    return app.rpc
-        .sendAndObserveResponses('sign', [message, accounts[0]])
+    return aragonApp
+        .accounts()
+        .mergeMap(accounts => aragonApp.rpc.sendAndObserveResponses('sign', [data, accounts[0]]))
         .toPromise()
 }
