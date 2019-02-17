@@ -29,6 +29,8 @@ export const DiscussionScreen = observer(({ position, isVisible, currentDiscussi
                    />
                    <Text size="xxlarge">Discussion Details</Text>
                 </AppBar>
+                
+                
                 <Wrapper>
                     {currentDiscussion.state === 'pending' &&
                         <AppLayout.Content>           

@@ -106,6 +106,8 @@ export class MainStore {
             date: new Date('2019-01-02')
         })
 
+        this._ethDiscussion.sendMessage(discussionId, message.content)
+
         this.currentMessageText = ''
     }
 }

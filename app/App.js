@@ -1,15 +1,6 @@
 import React from 'react'
 import { observer, inject } from 'mobx-react'
-import { AppLayout } from './components/app-layout'
-import {
-  AragonApp,
-  AppBar,
-  Button,
-  Text,
-  Card,
-  SidePanel,
-  observe
-} from '@aragon/ui'
+import { AragonApp } from '@aragon/ui'
 import { DiscussionListScreen } from './components/discussion-list-screen'
 import { DiscussionScreen } from './components/discussion-screen'
 import { NewDiscussionSidePanel } from './components/side-panels/new-discussion'
