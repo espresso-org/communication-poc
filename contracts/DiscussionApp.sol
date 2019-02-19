@@ -40,6 +40,10 @@ contract DiscussionApp is IForwarder, AragonApp {
         bool isActionForwarded;
     }
 
+    function initialize() onlyInit external {
+        initialized();
+    }  
+
     function isForwarder() public pure returns (bool) {
         return true;
     }
