@@ -35,7 +35,7 @@ export const DiscussionListScreen = observer(['mainStore'], ({ position, isVisib
                         <Discussions>
                             {mainStore.discussions.map(discussion => 
                                 <Card>
-                                    <StyledCountdown end={endDate} />
+                                    <Countdown end={endDate} />
                                     <DiscussionCard 
                                         discussion={discussion} 
                                         onOpenClick={() => mainStore.openDiscussion(discussion.id)}
@@ -59,7 +59,4 @@ const Discussions = styled.div`
 `
 const Card = styled.div`
     margin-right: 18px;
-`
-const StyledCountdown = styled(Countdown)`
-    margin-left: 10px;
 `
