@@ -9,7 +9,6 @@ import { observer, inject } from 'mobx-react'
 import { SideBar } from './side-bar'
 import { Message } from './message'
 
-
 export const DiscussionScreen = 
 inject('mainStore', 'discussionStore')(
 observer(({ position, isVisible, mainStore, discussionStore }) => 
@@ -22,7 +21,6 @@ observer(({ position, isVisible, mainStore, discussionStore }) =>
                    />
                    <Text size="xxlarge">Discussion Details</Text>
                 </AppBar>
-                
                 
                 <Wrapper>
                     {discussionStore.currentDiscussion.state === 'pending' &&
@@ -50,7 +48,6 @@ observer(({ position, isVisible, mainStore, discussionStore }) =>
                                 </MainContent>
                                 <SideBar />
                             </TwoPanels>          
-                        
                         </Content>
                     }
                 </Wrapper>
@@ -59,24 +56,20 @@ observer(({ position, isVisible, mainStore, discussionStore }) =>
     </Screen>  
 ))
 
-
 function onEnterKeyPress(cb) {
     return e => e.key === 'Enter' && cb()
 }
-
 
 const Main = styled.div`
     height: 100%;
     flex-grow: 1;
 `
-
 const TwoPanels = styled.div`
   display: flex;
   width: 100%;
   min-width: 800px;
   height: 100%;
 `
-
 const MainContent = styled.aside`
     display: flex;
     flex-direction: column;
@@ -87,24 +80,17 @@ const MainContent = styled.aside`
     width: 100%;
 
 `
-
 const Title = styled(Text).attrs({ size: 'xlarge' })`
     margin-bottom: 20px;
 `
-
-
-
 const Discussions = styled.div`
 `
-
 const Content = styled(AppLayout.Content)`
     height: 100%;
 `
-
 const Wrapper = styled(AppLayout.ScrollWrapper)`
     height: calc(100% - 64px);
 `
-
 const MainTextInput = styled(TextInput)`
     width: 100%;
     margin-top: auto;

@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-
 export const BackButton = props =>
     <Main {...props}>
         <svg width="24" height="19" viewBox="0 0 24 19">
@@ -16,7 +15,6 @@ export const BackButton = props =>
             />
         </svg>
     </Main>
-
 
 const Main = styled.span`
   display: flex;

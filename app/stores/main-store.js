@@ -1,4 +1,4 @@
-import { observable, action, computed } from 'mobx'
+import { observable, action } from 'mobx'
 
 export const ScreenType = {
     DiscussionList: 'DiscussionList',
@@ -22,10 +22,7 @@ const discussions = [{
     date: new Date('2018-12-31')
 }]
 
-
-
 export class MainStore {
-
     constructor(aragonApp, discussionsController, discussionStore) {
         this._app = aragonApp
 
@@ -66,5 +63,4 @@ export class MainStore {
         this._discussionStore.setCurrentDiscussion(discussionId)
         this.setCurrentScreen(ScreenType.Discussion)
     }
-    
 }

@@ -4,7 +4,6 @@ import { Card } from '@aragon/ui'
 import Blockies from 'react-blockies'
 import { EthAddress } from './eth-address'
 
-
 export const Message = ({ message }) => 
     <Main>
         <TopContent>
@@ -29,8 +28,6 @@ export const Message = ({ message }) =>
         <BottomBar></BottomBar>
     </Main>
 
-
-
 const Main =styled(Card)`
     display: flex;
     flex-direction: column;
@@ -41,38 +38,31 @@ const Main =styled(Card)`
         margin-top: 0;
     }
 `
-
 const TopContent = styled.div`
     display: flex;
     flex-direction: row;
     min-height: 90px;
     padding: 16px;
 `
-
 const BottomBar = styled.div`
     height: 34px;
     padding: 0 16px;
     /*border-top: 1px solid #E6E6E6;*/
 `
-
 const MessageInfo = styled.div`
     display: flex;
     align-items: center;
 `
-
 const MessageDate = styled.div`
     margin-left: 8px;
     color: #ccc;
 `
-
 const Author = styled.div`
     font-weight: 600;
 `
-
 const MessageContent = styled.div`
     margin-top: 4px;
 `
-
 const AuthorIcon = styled.div(({ size=32 }) => `
     display: inline-block;
     width: ${size}px;

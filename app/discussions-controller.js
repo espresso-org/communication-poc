@@ -1,8 +1,6 @@
 import sign from './utils/sign'
 
-
 export class DiscussionsController {
-
     constructor(opts = {}) {
         this._opts = opts
         this._transportProvider = opts.transportProvider
@@ -29,10 +27,7 @@ export class DiscussionsController {
             this._transportProvider.post(this._encodeMessage(signedMessage))
     }
 
-
-
     async signMessage(message) {
-
         return this._app
             .accounts()
             .map(accounts => ({ ...message, author: accounts[0] }))
@@ -43,9 +38,7 @@ export class DiscussionsController {
             }))
             .take(1)
             .toPromise()
-        
     }
-
 
     _decodeMessage = JSON.parse
     _encodeMessage = JSON.stringify
@@ -54,7 +47,6 @@ export class DiscussionsController {
         // TODO: Message validation
         return true
     }
-
 }
 
 const signatureTemplate = ({ author, content }) => `

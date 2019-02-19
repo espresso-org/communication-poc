@@ -2,7 +2,6 @@ import { observable, action, computed } from 'mobx'
 import { fromPromise } from 'mobx-utils'
 
 export class DiscussionStore {
-
     constructor(discussionsController) {
         this._ctl = discussionsController
     }    
@@ -36,10 +35,7 @@ export class DiscussionStore {
         this.currentMessageText = ''
     }    
 
-
     _onNewMessage(msg) {
         this.messages.push(msg)
     }
-
-
 }

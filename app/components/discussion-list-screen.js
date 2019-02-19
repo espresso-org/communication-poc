@@ -13,7 +13,6 @@ import {
   
   } from '@aragon/ui'
 
-
 export const DiscussionListScreen = observer(['mainStore'], ({ position, isVisible, mainStore }) => 
     <Screen position={position} animate>
         {isVisible && (
@@ -49,7 +48,6 @@ export const DiscussionListScreen = observer(['mainStore'], ({ position, isVisib
         )}
     </Screen>     
 )
-
 
 const Discussions = styled.div`
     display: flex;

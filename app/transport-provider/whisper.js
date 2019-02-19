@@ -7,9 +7,7 @@ const POW_TARGET = 0.2
 const POW_TIME = 60
 const DEFAULT_TOPIC = '0x00000001'
 
-
 export class WhisperProvider {
-
     constructor(opts) {
         this._initialize(opts)
     }
@@ -30,7 +28,6 @@ export class WhisperProvider {
         })  
     }
 
-
     messages() {
         return Observable.create(observer => {
             this._web3.shh.subscribe('messages', {
@@ -48,5 +45,3 @@ export class WhisperProvider {
     }     
 
 }
-
-

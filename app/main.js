@@ -6,7 +6,6 @@ import { Provider } from 'mobx-react'
 import injectDependencies from './dependencies'
 import App from './App'
 
-
 class ConnectedApp extends React.Component {
 
   componentDidMount() {
@@ -38,6 +37,3 @@ ReactDOM.render(
   <ConnectedApp />,
   document.getElementById('root')
 )
-
-
-

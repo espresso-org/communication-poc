@@ -52,7 +52,6 @@ import { LargeTextInput, SaveButton } from '../large-inputs'
             </SidePanel>
         ) 
     }
-
-} 
+}
 
 export { NewDiscussionSidePanel }

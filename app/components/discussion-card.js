@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Card, Countdown, CircleGraph, ProgressBar, Text, theme, Button } from '@aragon/ui'
+import { Card, Countdown, CircleGraph, Text, Button } from '@aragon/ui'
 
 export const DiscussionCard = ({ discussion, onOpenClick }) => 
     <Main>
@@ -68,11 +68,6 @@ const TopBar = styled.div`
     font-size: 12px;    
     justify-content: end;
     width: 100%;
-`
-const CommentsCount = styled.div`
-    display: flex;
-    font-size: 12px;
-    color: #666;    
 `
 const DateContainer = styled.div`
     text-align: left;
