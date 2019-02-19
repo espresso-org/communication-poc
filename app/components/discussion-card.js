@@ -1,28 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Card, Countdown, CircleGraph, Text, Button } from '@aragon/ui'
+import { Card, CircleGraph, Text, Button } from '@aragon/ui'
 
 export const DiscussionCard = ({ discussion, onOpenClick }) => 
     <Main>
-        <TopBar>
-            <DateContainer>{printDate(discussion.date)}</DateContainer>                   
-        </TopBar>
-        
         <Title>{discussion.title}</Title>
-        <StatsContainer>
-            <Countdown end={endDate} />               
-        </StatsContainer>
         <Description>{discussion.description}</Description>
-
         <ForwardingConditions>
             <Condition>
                 <Text>Participants</Text>
-                <div><CircleGraph value={1/3} /></div>
+                <div style={{marginTop: '10px'}}><CircleGraph value={1/3} /></div>
             </Condition>
             
             <Condition>
                 <Text>Token total</Text>
-                <div><CircleGraph value={3/8} /></div>
+                <div style={{marginTop: '10px'}}><CircleGraph value={3/8} /></div>
             </Condition>
         </ForwardingConditions>
 
@@ -31,15 +23,6 @@ export const DiscussionCard = ({ discussion, onOpenClick }) =>
         </BottomBar>
     </Main>
 
-
-const DAY_IN_MS = 1000 * 60 * 60 * 24
-const endDate = new Date(Date.now() + 5 * DAY_IN_MS)
-
-function printDate(date) {
-    const diff = (Date.now() - date.getTime()) / (1000 * 60 * 60 * 24)
-    return `${diff.toFixed(0)} days ago`
-}
-
 const Main = styled(Card)`
     padding: 6px 12px 16px 12px;
     position: relative;
@@ -47,7 +30,7 @@ const Main = styled(Card)`
     flex-direction: column;
     align-items: center;
     justify-content: stretch;    
-    margin: 0 8px;
+    margin-top: 5px;
 `
 const Title = styled(Text)
     .attrs({ size: 'xlarge' })`
@@ -60,32 +43,15 @@ const Description = styled(Text)`
     text-align-last: center;
 `
 const BottomBar = styled.div`
-    margin-top: 20px;
-`
-const TopBar = styled.div`
-    display: flex;
-    color: #666;
-    font-size: 12px;    
-    justify-content: end;
-    width: 100%;
-`
-const DateContainer = styled.div`
-    text-align: left;
-    font-size: 12px;
-    color: #666;
-    width: 100%;
-`
-const StatsContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    margin-top: 30px;
 `
 const ForwardingConditions = styled.div`
     display: flex;
-    margin-top: 10px;
+    margin-top: 15px;
     justify-content: space-between;
 `
 const Condition = styled.div`
     margin-right: 20px;
     margin-left:20px;
+    margin-top: 10px;
 `

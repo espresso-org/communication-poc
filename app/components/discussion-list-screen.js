@@ -5,12 +5,10 @@ import { DiscussionCard } from './discussion-card'
 import { observer } from 'mobx-react'
 import styled from 'styled-components'
 import {
-    AragonApp,
     AppBar,
     Button,
-    Text,
-    Card
-  
+    Countdown,
+    Text  
   } from '@aragon/ui'
 
 export const DiscussionListScreen = observer(['mainStore'], ({ position, isVisible, mainStore }) => 
@@ -35,12 +33,15 @@ export const DiscussionListScreen = observer(['mainStore'], ({ position, isVisib
                         <Text size="xlarge">Open Discussions</Text>
                         <br />
                         <Discussions>
-                        {mainStore.discussions.map(discussion => 
-                            <DiscussionCard 
-                                discussion={discussion} 
-                                onOpenClick={() => mainStore.openDiscussion(discussion.id)}
-                            />
-                        )}
+                            {mainStore.discussions.map(discussion => 
+                                <Card>
+                                    <StyledCountdown end={endDate} />
+                                    <DiscussionCard 
+                                        discussion={discussion} 
+                                        onOpenClick={() => mainStore.openDiscussion(discussion.id)}
+                                    />
+                                </Card>
+                            )}
                         </Discussions>
                     </AppLayout.Content>
                 </AppLayout.ScrollWrapper>
@@ -49,8 +50,16 @@ export const DiscussionListScreen = observer(['mainStore'], ({ position, isVisib
     </Screen>     
 )
 
+const DAY_IN_MS = 1000 * 60 * 60 * 24
+const endDate = new Date(Date.now() + 5 * DAY_IN_MS)
+
 const Discussions = styled.div`
     display: flex;
     flex-direction: row;
-    margin-left: -8px;
+`
+const Card = styled.div`
+    margin-right: 18px;
+`
+const StyledCountdown = styled(Countdown)`
+    margin-left: 10px;
 `
